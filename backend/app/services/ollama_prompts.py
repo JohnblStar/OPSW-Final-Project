@@ -24,7 +24,6 @@ OCR 원문:
       "drug_name": "", 
       "normalized_name": "",
       "dose": "",
-      "ingredient": "",
       "amount_per_dose": "",
       "times_per_day": "",
       "days": ""
