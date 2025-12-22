@@ -42,6 +42,7 @@ async def upload_image(file: UploadFile = File(...)):
         print("OCR ERROR:", e)
         raise HTTPException(status_code=500, detail=str(e))
 
+
 '''
 # ----------------------------------------------------
 # 2) FULL OCR + 약 API 검색 
@@ -71,6 +72,7 @@ async def upload_image_with_drug_info(file: UploadFile = File(...)):
         print("OCR+Drug ERROR:", e)
         raise HTTPException(status_code=500, detail=str(e))
 '''
+
 
 # ----------------------------------------------------
 # 3)  OCR + Ollama AI 분석
@@ -247,3 +249,4 @@ async def upload_image_gemini_and_save(
         traceback.print_exc()
         print("🔥 GEMINI SAVE ERROR:", e)
         raise HTTPException(status_code=500, detail=f"서버 내부 오류: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
