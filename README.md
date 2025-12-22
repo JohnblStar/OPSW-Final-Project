@@ -6,11 +6,11 @@
 ---
 
 ## 팀원
-- 20225259 조한별
-- 20225131 김은성
-- 20235175 박태양
-- 20225104 강지우
-- 20185122 김하준
+- 조한별 (20225259) – FE · [@JohnblStar](https://github.com/JohnblStar)
+- 김은성 (20225131) – DB · [@eunseong624](https://github.com/eunseong624)
+- 박태양 (20235175) – BE · [@ILYsun-hub](https://github.com/ILYsun-hub)
+- 강지우 (20225104) – BE · [@jwk061214](https://github.com/jwk061214)
+- 김하준 (20185122) – FE · [@Hajunasdf](https://github.com/Hajunasdf)
 ---
 
 ## 프로젝트 개요
