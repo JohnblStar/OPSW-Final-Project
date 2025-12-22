@@ -8,12 +8,10 @@ from google.cloud import firestore
 from datetime import datetime, timezone
 import uuid
 import os
-
-db = firestore.Client.from_service_account_json(
-    os.getenv("FIREBASE_ADMIN_KEY")
-)
+from app.core.firestore_db import get_db
 
 def create_elder(user_id: str, name: str, birth: str = None, gender: str = None):
+    db = get_db()
     elder_id = str(uuid.uuid4())
 
     doc = {
@@ -29,6 +27,7 @@ def create_elder(user_id: str, name: str, birth: str = None, gender: str = None)
 
 
 def get_elders_by_user(user_id: str):
+    db = get_db()
     docs = (
         db.collection("elders")
         .where("user_id", "==", user_id)
@@ -44,6 +43,7 @@ def get_elders_by_user(user_id: str):
     return result
 
 def get_or_create_elder(user_id: str, name: str):
+    db = get_db()
     docs = (
         db.collection("elders")
         .where("user_id", "==", user_id)

@@ -4,9 +4,7 @@ import os
 import uuid
 import re
 
-db = firestore.Client.from_service_account_json(
-    os.getenv("FIREBASE_ADMIN_KEY")
-)
+from app.core.firestore_db import get_db
 
 # ---------------------------
 # 공통 유틸: 숫자 추출
@@ -30,6 +28,7 @@ def extract_int(value, default=1):
 # 1. OCR 원본 저장
 # ---------------------------
 def save_scan(user_id: str, elder_id: str, raw_text: str, ai_parsed: dict):
+    db = get_db()
     ref = db.collection("prescription_scans").document()
     ref.set({
         "user_id": user_id,
@@ -45,6 +44,7 @@ def save_scan(user_id: str, elder_id: str, raw_text: str, ai_parsed: dict):
 # 2. 약 리스트 저장 (ID만 생성)
 # ---------------------------
 def save_medicines(user_id: str, scan_id: str, medications: list):
+    db = get_db()
     return [str(uuid.uuid4()) for _ in medications]
 
 
@@ -52,6 +52,7 @@ def save_medicines(user_id: str, scan_id: str, medications: list):
 # 3. 처방전 저장
 # ---------------------------
 def save_prescription(user_id: str, elder_id: str, scan_id: str, medicines: list):
+    db = get_db()
     prescription_id = str(uuid.uuid4())
 
     db.collection("prescriptions").document(prescription_id).set({
@@ -70,6 +71,7 @@ def save_prescription(user_id: str, elder_id: str, scan_id: str, medicines: list
 # ---------------------------
 def save_schedules(user_id: str, elder_id: str, medicine_ids: list, medications: list):
     schedule_ids = []
+    db = get_db()
 
     for idx, med in enumerate(medications):
         med_id = medicine_ids[idx]
@@ -138,6 +140,7 @@ def create_intake_logs_for_schedule(
     days: int,
     times: list,
 ):
+    db = get_db()
     slot_map = {
         "09:00": "morning",
         "13:00": "noon",
@@ -175,6 +178,7 @@ def create_intake_logs_for_schedule(
 # 6. 복약 완료 처리
 # ---------------------------
 def mark_intake_taken(log_id: str):
+    db = get_db()
     db.collection("intake_logs").document(log_id).update({
         "status": "taken",
         "taken_time": datetime.now(timezone.utc),

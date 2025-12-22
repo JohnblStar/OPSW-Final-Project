@@ -1,6 +1,8 @@
 from dotenv import load_dotenv
 load_dotenv() 
 
+load_dotenv()
+from app.routes.elder_routes import router as elder_router
 from fastapi import FastAPI
 
 from app.routes.ocr_routes import router as ocr_router
@@ -16,6 +18,8 @@ app = FastAPI(
 # OCR + AI + Save
 app.include_router(ocr_router)
 app.include_router(intake_router)
+app.include_router(elder_router)
+
 
 # 복약 알림
 app.include_router(alert_router)

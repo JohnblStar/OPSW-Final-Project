@@ -128,5 +128,9 @@ package-lock.json
 *.bak
 
 backend/app/core/google_vision_key.json
+backend/app/core/firebase_admin_key.json
+.env
+env
+app/core/*.json
 backend/app/core/service-account.json
 streamlit_app.py
